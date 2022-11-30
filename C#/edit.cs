@@ -1,0 +1,94 @@
+//Show the temperature of a given city using a GUI.		
+
+using System.Windows.Forms;
+using System.Drawing;
+using System;
+using System.Data;
+using System.Collections;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json.Linq;
+
+
+
+namespace API
+{
+    public class GUI : Form
+    {
+		Label mylab, resultlab;
+		TextBox Mytextbox;
+		Button MyButton;
+		//string cityName;
+
+        public GUI()
+        {
+            InitComponents();
+        }
+
+        private void InitComponents()
+        {
+            Text = "API";
+            ClientSize = new Size(800, 450);
+            CenterToScreen();		
+
+			mylab = new Label();
+			mylab.Text = "Enter city name";
+			mylab.Location = new Point(222, 90);
+			mylab.AutoSize = true;
+
+
+			Mytextbox = new TextBox();
+			Mytextbox.Location = new Point(350, 90);
+			Mytextbox.AutoSize = true;
+			Console.WriteLine(Mytextbox.Text);
+
+
+			MyButton = new Button();
+			MyButton.Location = new Point(225, 198);
+			MyButton.Text = "Search";
+			MyButton.AutoSize = true;
+			MyButton.Click += btn_Click;
+			
+
+			resultlab = new Label();
+			resultlab.Location = new Point(222, 300);
+			resultlab.AutoSize = true;
+
+
+			this.Controls.Add(mylab);
+			this.Controls.Add(Mytextbox);
+			this.Controls.Add(resultlab);
+			this.Controls.Add(MyButton);
+		}
+		private void btn_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				var url = "https://api.openweathermap.org/data/2.5/weather?q=" + Mytextbox.Text + "&appid=3008aa81b09a80e673768dd0b143e0a1&units=metric";
+				var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+				httpRequest.Accept = "application/json";
+				var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+				using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+				{
+					var result = streamReader.ReadToEnd();
+					string jsonData = @result;
+					var details = JObject.Parse(jsonData);
+					string report = string.Concat(details["main"]);
+					var temp = "Temperature: " + report[8] + report[9] + report[10] + report[11] + report[12];
+					resultlab.Text = Mytextbox.Text + " " + temp;
+				}
+			}
+			catch(System.Net.WebException)
+			{
+				Console.WriteLine("city not found!");
+			}
+		}
+       
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.Run(new GUI());
+        }
+    }
+}

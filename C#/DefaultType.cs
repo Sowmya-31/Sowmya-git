@@ -1,0 +1,25 @@
+// Default value data type 
+
+using System;
+
+namespace PracticeBasics 
+{
+	class DefaultConstructor
+	{
+		int numberInt;
+		float numberFloat;
+		bool option;
+		char textChar;
+		String textString;
+		public static void Main(String[] args)
+		{
+			DefaultConstructor defaultChecking = new  PracticeBasics.DefaultConstructor();
+			Console.WriteLine("integer default value is: " + defaultChecking.numberInt);
+			Console.WriteLine("Float default value is: " +defaultChecking.numberFloat);
+			Console.WriteLine("Boolean default value is: " +defaultChecking.option);
+			Console.WriteLine("Character default value is: " +defaultChecking.textChar);
+			Console.WriteLine("String default value is: " +defaultChecking.textString);
+		}
+	}
+} 
+

@@ -1,0 +1,70 @@
+// Create a Datatable locally, without any connection to the database, insert data into the Datatable and see if you can save the Datatable into the database as a new table.
+using System;
+using System.Data;
+using MySql.Data.MySqlClient;
+using System.Xml;
+using MySql.Data;
+
+
+namespace dataTableToServer
+{
+	class dataTable1
+	{
+		public static void Main(String[] args)
+		{
+			DataTable StudentDetails = new DataTable();
+			StudentDetails.Columns.Add("Name");
+			StudentDetails.Columns.Add("ID");
+			while(1==1)
+			{
+				Console.WriteLine("Do you want to enter new student: (1. Yes, 2. No)");
+				int choice = int.Parse(Console.ReadLine());
+				//int choice = Convert.ToInt32(Console.ReadLine());
+				if(choice == 1)
+				{
+					Console.WriteLine("Enter new student Name: ");
+					string name = Console.ReadLine();
+					Console.WriteLine("Enter new student ID: ");
+					int id = int.Parse(Console.ReadLine());
+					StudentDetails.Rows.Add(name, id);
+				}
+				else
+				{
+					break;
+				}
+			}
+			//try
+			//{
+			string connStr = "server=165.22.14.77;user=Dheeraj;database=dbDheeraj;password=pwdDheeraj";
+			//string connStr = "server=165.22.14.77;user=Sowmya;database=dbSowmyaSri;port=3306;password=pwdSowmya";
+			
+
+			//using(SqlConnection connection = new SqlConnection(connStr))
+			//{
+				MySqlConnection connection = new MySqlConnection(connStr);
+				
+				//DataRow[] rowArray = StudentDetails.Select();
+				MySqlBulkLoader bulkLoader = new MySqlBulkLoader(connection);
+				bulkLoader.Local = true;
+				bulkLoader.TableName = "StudentDetails";
+				bulkLoader.FieldTerminator = "\t";
+				bulkLoader.LineTerminator = "\n";
+				
+				
+				
+			    //{
+					
+					connection.Open(); 
+					Console.WriteLine("***");
+					int rowArray = bulkLoader.Load();
+					Console.WriteLine(rowArray);
+
+				//}
+			//}
+			 //catch (Exception ex)
+			        //{
+			           // Console.WriteLine(ex.Message);
+			       // }
+       	}
+	}
+}

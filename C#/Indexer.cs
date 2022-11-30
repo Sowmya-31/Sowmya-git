@@ -1,0 +1,64 @@
+// Indexer
+
+using System;
+
+class Indexer
+{
+	String Name;
+	int Age;
+	float Marks;
+	public Indexer(String Name, int Age, float Marks)
+	{
+		this.Name = Name;
+		this.Age = Age;
+		this.Marks = Marks;
+	}
+
+	public object this[int index]
+	{
+		get
+		{
+			if(index == 0)
+				return Name;
+			else if(index == 1)
+				return Age;
+			else if(index == 2)
+				return Marks;
+			return null;
+		}
+		set
+		{
+			if (index == 0)
+				Name = (String)value;
+			else if(index == 1)
+				Age = (int)value;
+			else if(index == 2)
+				Marks = (float)value;
+		}
+	}
+
+
+
+	public static void Main()
+	{
+		
+		Console.Write("Enter Name: ");
+		String name = Console.ReadLine();
+		Console.Write("Enter Age: ");
+		int age = int.Parse(Console.ReadLine());
+		Console.Write("Enter Marks: ");
+		float marks = float.Parse(Console.ReadLine());
+		Indexer i = new Indexer(name, age, marks);
+		Console.WriteLine("Name: " + i[0]);
+		Console.WriteLine("Age: " + i[1]);
+		Console.WriteLine("Marks: " + i[2]);
+
+		Console.WriteLine("to modify name");
+		Console.Write("Enter Name: ");
+		String nameEdit = Console.ReadLine();
+		i[0] = nameEdit;
+		Console.WriteLine("Name: " + i[0]);
+		Console.WriteLine("Age: " + i[1]);
+		Console.WriteLine("Marks: " + i[2]);	
+	}
+}

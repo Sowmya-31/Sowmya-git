@@ -1,0 +1,73 @@
+<!-- Calculator -->
+<!DOCTYPE html>
+      <html>
+        <head>
+          <title>Calculator</title>
+		  <link rel="icon" type="image/x-icon" href="V:\training\Web\IconTitle.png">
+		  <script src="https://kit.fontawesome.com/ed45a7aa0e.js" crossorigin="anonymous"></script> 
+		  <style>
+		  body	{
+				margin :100px;	
+			}
+		  .table
+		  {
+				border: 3px solid black;
+				background-color: #AAD6A0;
+		  }
+		  #operation
+		  { 
+				border: 3px solid black;
+				background-color: tomato;
+				font-size : 20px;
+		  }
+		  </style>
+
+</head>
+<body>
+<table class = "table" align = "center">
+<tr>
+<th colspan="4" ><h1>Calculator</h1><i class="fa-solid fa-calculator" style="color:#243c64;"></i></th>
+<tr >
+<td colspan="2" ><label> First number </label></td><td colspan="2"><input type="textbox" name="input1"></td>
+</tr>
+<tr>
+<td colspan="2" ><label> Second number </label></td><td colspan="2"><input type="textbox" name="input2"></td>
+</tr>
+<tr>
+<td><button id = "operation" onClick="add()">+</button></td>
+<td><button id = "operation" onClick="sub()">-</button></td>
+<td><button id = "operation" onClick="mul()">*</button></td>
+<td><button id = "operation" onClick="div()">%</button></td>
+<tr >
+<td colspan="2" ><label >Result is: </label></td><td colspan="2"><input type="textbox" name="display"></td>
+</tr>
+</table>
+<script>
+   function add() {
+      var f = parseInt(document.getElementsByName('input1')[0].value);
+      var s =parseInt(document.getElementsByName('input2')[0].value);
+      var result = f+s;
+      document.getElementsByName('display')[0].value= result;
+   }
+   function sub() {
+      var f = parseInt(document.getElementsByName('input1')[0].value);
+      var s =parseInt(document.getElementsByName('input2')[0].value);
+      var result = f-s;
+      document.getElementsByName('display')[0].value= result;
+   }
+   function mul() {
+      var f = parseInt(document.getElementsByName('input1')[0].value);
+      var s =parseInt(document.getElementsByName('input2')[0].value);
+      var result = f*s;
+      document.getElementsByName('display')[0].value= result;
+   }
+   function div() {
+      var f = parseInt(document.getElementsByName('input1')[0].value);
+      var s =parseInt(document.getElementsByName('input2')[0].value);
+      var result = f%s;
+      document.getElementsByName('display')[0].value= result;
+   }
+</script>
+</body>
+</html>
+

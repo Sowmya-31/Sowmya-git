@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>Calculator</title>
+		<link rel="icon" type="image/x-icon" href="V:\training\Web\IconTitle.png">
+		<link rel = "stylesheet" href = "calculator.css">
+		<script src = "calculator.js"></script> 
+		<script src="https://kit.fontawesome.com/ed45a7aa0e.js" crossorigin="anonymous"></script>  
+	</head>
+	<body>
+	<table class = "table" align = "center">
+		<tr>
+			<th colspan="5" style="text-align:center;"><h1>Calculator</h1></th>
+		</tr>
+		<tr>
+			<td colspan="5" style="text-align:center;"><input type = "textbox" id = "display" name = "display" value = "" maxlength = "40"><i class="fa-solid fa-calculator" style="color:#243c64;"></i></td>
+		<tr>
+			<td><Button id = "zero" name = "number" value = "0" onClick = "display('0')" onkeydown="Function(action)" >0</Button></td>
+			<td><Button id = "one" name = "number" value = "1" onclick = "display('1')" onkeydown="Function(action)">1</Button></td>
+			<td><Button id = "two" name = "number" value = "2" onclick = "display('2')" onkeydown="Function(action)">2</Button></td>
+			<td><Button id = "three" name = "number" value = "3" onclick = "display('3')" onkeydown="Function(action)">3</Button></td>
+			<td><Button id = "delete" name = "delete" value = "clear" onclick = "clear()" onkeydown="Function(action)">clear</Button></td>
+		</tr>
+		<tr>
+			<td><Button id = "four" name = "number" value = "4" onclick = "display('4');" onkeydown="Function(action)">4</Button></td>
+			<td><Button id = "five" name = "number" value = "5" onclick = "display('5');" onkeydown="Function(action)">5</Button></td>
+			<td><Button id = "six" name = "number" value = "6" onclick = "display('6');" onkeydown="Function(action)">6</Button></td>
+			<td><Button id = "arithmetic" name = "operation" onClick="add('+')" onkeydown="Function(action)">+</Button></td>
+			<td><Button id = "arithmetic" name = "operation" onclick = "sub('-');" onkeydown="Function(action)">-</Button></td>
+		</tr>
+		<tr>
+			<td><Button id = "seven" name = "number" value = "7" onclick = "display('7');" onkeydown="Function(action)">7</Button></td>
+			<td><Button id = "eight" name = "number" value = "8" onclick = "display('8');" onkeydown="Function(action)">8</Button></td>
+			<td><Button id = "nine" name = "number" value = "9" onclick = "display('9');" onkeydown="Function(action)">9</Button></td>	
+			<td><Button id = "arithmetic" name = "operation" onclick = "mul('*');" onkeydown="Function(action)">*</Button></td>
+			<td><Button id = "arithmetic" name = "operation" onclick = "div('%');" onkeydown="Function(action)">%</Button></td>
+		</tr>
+		<tr>	
+			<td colspan="5" style="text-align:center;"><Button id = "total" name = "FindResult" onclick = "calculate();" >=</Button></td>
+		</tr>
+	</table>
+ </body>
+</html>

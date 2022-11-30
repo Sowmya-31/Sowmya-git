@@ -1,0 +1,145 @@
+import java.sql.*;  
+import java.util.Scanner;
+import java.util.ArrayList;
+class CURD
+	{ 
+		public static void main(String[] args)
+		{
+			CrudMethods cm = new CrudMethods();
+		}
+	}
+class CrudMethods
+{
+	public CrudMethods()
+	{
+		try
+		{  
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();  
+			Connection con = DriverManager.getConnection(  
+			"jdbc:mysql://165.22.14.77:3306/dbSowmyaSri","Sowmya","pwdSowmya");  
+			Statement stmt = con.createStatement(); 
+			System.out.println("Connected to database successfully");
+
+			ResultSet rs = stmt.executeQuery("SELECT *FROM CustomerDetails");
+			ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
+			int counter = md.getColumnCount();
+			String colName[] = new String[counter];
+			ArrayList<String> ArrList = new ArrayList<String>();
+			for (int loop = 1; loop <= counter; loop++) 
+			{
+				colName[loop - 1] = md.getColumnLabel(loop);
+				ArrList.add(colName[loop - 1]);
+			}
+
+			String query = "select * from MENU";
+			rs = stmt.executeQuery(query);
+			while(rs.next())
+			{
+			System.out.println(rs.getString("Menu"));
+			}
+
+
+			System.out.print("Enter your choice: ");
+			Scanner scannerObject = new Scanner(System.in);
+			int choice = scannerObject.nextInt();
+
+			if(choice == 1)
+			{
+				System.out.print("Enter " + ArrList.get(0) + ": ");
+				String fieldValue1 = scannerObject.next();
+				System.out.print("Enter " + ArrList.get(1) + ": ");
+				String fieldValue2 = scannerObject.next();
+				System.out.print("Enter " + ArrList.get(2) + ": ");
+				Double fieldValue3 = scannerObject.nextDouble();
+				query = "INSERT INTO CustomerDetails VALUES(?,?,?)";
+
+				// create the mysql insert preparedstatement
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+				preparedStmt.setString(1, fieldValue1);
+				preparedStmt.setString(2, fieldValue2);
+				preparedStmt.setDouble(3, fieldValue3);		
+				preparedStmt.executeUpdate();
+				System.out.println("Inserted successfully");	
+			}
+			else if (choice == 2)
+			{
+				for (int loop = 1; loop <= counter ; loop++)
+				{
+					System.out.print(ArrList.get(loop - 1) + "\t");
+				}
+				System.out.println();
+				query = "select * from CustomerDetails";
+				rs = stmt.executeQuery(query);
+				while(rs.next())
+				{
+					System.out.println(rs.getString(ArrList.get(0)) + "\t" + rs.getString(ArrList.get(1)) + "\t" + rs.getString(ArrList.get(2)));
+				}
+
+			}
+
+			else if (choice == 3)
+			{
+				System.out.print("Enter " + ArrList.get(0) + ": ");
+				String fieldValue1 = scannerObject.next();
+				query = "select * from CustomerDetails";
+				rs = stmt.executeQuery(query);
+				for (int loop = 1; loop <= counter ; loop++)
+				{
+					System.out.print(ArrList.get(loop - 1) + "\t");
+				}
+				System.out.println();
+				while(rs.next())
+				{
+					if (rs.getString(ArrList.get(0)).equals(fieldValue1))
+					{
+						System.out.println(rs.getString(ArrList.get(0)) + "\t" + rs.getString(ArrList.get(1)) + "\t" + rs.getString(ArrList.get(2)));
+
+					}
+				}
+			}
+			 
+			else if (choice == 4)
+			{
+				System.out.print("Enter " + ArrList.get(0) + ": ");
+				String fieldValue1 = scannerObject.next();
+				// create the java mysql update preparedstatement
+				query = "update CustomerDetails set Balance = ? where AccountNumber = ?";
+				System.out.print("Enter " + ArrList.get(2) + ": ");
+				Double fieldValue3 = scannerObject.nextDouble();
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+				preparedStmt.setDouble(1, fieldValue3);
+				preparedStmt.setString(2, fieldValue1);
+
+				// execute the java preparedstatement
+				preparedStmt.executeUpdate();
+			}
+
+			else if (choice == 5)
+			{
+				System.out.print("Enter " + ArrList.get(0) + ": ");
+				String fieldValue1 = scannerObject.next();
+				query = "delete from CustomerDetails where AccountNumber = ?";
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+				preparedStmt.setString(1, fieldValue1);
+
+				// execute the preparedstatement
+				preparedStmt.execute();
+			}
+
+			else if (choice == 6)
+			{
+				 System.exit(0);
+			}
+
+			else
+			{
+				System.out.println("Enter valid choice!");
+			}
+		}
+		catch(Exception e)
+		{ 
+			System.out.println(e);
+		} 
+	}
+
+}

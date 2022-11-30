@@ -1,0 +1,194 @@
+Package MyPackCRUD;
+import java.sql.*;  
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+class CrudMethods
+{
+	Connection con;
+	Statement stmt;
+	ResultSet rs;
+	ResultSetMetaData md;
+	ArrayList<String> ArrList = new ArrayList<String>();
+	Scanner scannerObject = new Scanner(System.in);
+	int counter;
+	String query;
+	public CrudMethods()
+	{
+		try
+		{  
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();  
+			con = DriverManager.getConnection(  
+			"jdbc:mysql://165.22.14.77:3306/dbSowmyaSri","Sowmya","pwdSowmya");  
+			stmt = con.createStatement(); 
+
+			rs = stmt.executeQuery("SELECT *FROM CustomerDetails");
+			md = (ResultSetMetaData) rs.getMetaData();
+			counter = md.getColumnCount();
+			String colName[] = new String[counter];
+			for (int loop = 1; loop <= counter; loop++) 
+			{
+				colName[loop - 1] = md.getColumnLabel(loop);
+				ArrList.add(colName[loop - 1]);
+			}
+
+			query = "select * from MENU";
+			rs = stmt.executeQuery(query);
+			while(rs.next())
+			{
+			System.out.println(rs.getString("Menu"));
+			}
+		}
+		catch(Exception e)
+		{ 
+			System.out.println(e);
+		} 
+	}
+	
+	public void Create() 
+	{
+		try
+		{
+			ArrayList<String> ValuesList = new ArrayList<String>();
+			ArrayList<Double> ValuesList1 = new ArrayList<Double>();
+			for (int loop = 1; loop <= counter ; loop++)
+			{
+				if (loop == counter)
+				{
+					System.out.print("Enter " +  ArrList.get(loop - 1) + ": ");
+					Double fieldValue = scannerObject.nextDouble();
+					ValuesList1.add(fieldValue);
+				}
+				else
+				{
+					System.out.print("Enter " + ArrList.get(loop - 1) + ": ");
+					String fieldValue = scannerObject.next();
+					ValuesList.add(fieldValue);
+				}
+			}
+			
+			query = "INSERT INTO CustomerDetails VALUES(?,?,?)";
+
+			// create the mysql insert preparedstatement
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			for (int loop = 1; loop <= counter ; loop++)
+			{
+				if (loop == counter)
+				{
+					preparedStmt.setDouble(loop, ValuesList1.get(0));
+				}
+				else
+				{
+					preparedStmt.setString(loop, ValuesList.get(loop - 1));
+				}
+			}
+					
+			preparedStmt.executeUpdate();
+			System.out.println("Created successfully");	
+		}
+		catch(Exception e)
+		{ 
+			System.out.println(e);
+		} 		
+	}
+
+	public void Read() 
+	{
+		try
+		{
+			PrintColumns();
+			query = "select * from CustomerDetails";
+			rs = stmt.executeQuery(query);
+			while(rs.next())
+			{
+				System.out.println(rs.getString(ArrList.get(0)) + "\t" + rs.getString(ArrList.get(1)) + "\t" + rs.getString(ArrList.get(2)));
+			}
+		}
+		catch(Exception e)
+		{ 
+			System.out.println(e);
+		} 
+	}
+
+	public void Search() 
+	{
+		try
+		{
+			String fieldValue1 = getInput();
+			query = "select * from CustomerDetails";
+			rs = stmt.executeQuery(query);
+			PrintColumns();
+			while(rs.next())
+			{
+				if (rs.getString(ArrList.get(0)).equals(fieldValue1))
+				{
+					System.out.println(rs.getString(ArrList.get(0)) + "\t" + rs.getString(ArrList.get(1)) + "\t" + rs.getString(ArrList.get(2)));
+				}
+			}
+		}
+		catch(Exception e)
+		{ 
+			System.out.println(e);
+		} 	
+	}
+
+	public void Update() 
+	{
+		try
+		{
+			String fieldValue1 = getInput();
+			query = "update CustomerDetails set Balance = ? where AccountNumber = ?";
+			System.out.print("Enter " + ArrList.get(2) + ": ");
+			Double fieldValue3 = scannerObject.nextDouble();
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			preparedStmt.setDouble(1, fieldValue3);
+			preparedStmt.setString(2, fieldValue1);
+			preparedStmt.executeUpdate();
+			System.out.println(ArrList.get(counter - 1) + "updated successfully");
+		}
+		catch(Exception e)
+		{ 
+			System.out.println(e);
+		} 	
+	}
+
+	public void Delete() 
+	{
+		try
+		{
+			String fieldValue1 = getInput();
+			query = "delete from CustomerDetails where AccountNumber = ?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			preparedStmt.setString(1, fieldValue1);
+			preparedStmt.execute();
+			System.out.println("Deleted successfully");
+		}
+		catch(Exception e)
+		{ 
+			System.out.println(e);
+		} 	
+	}
+
+	public void Exit()
+	{
+		System.exit(0);
+	}
+
+	public void PrintColumns()
+	{
+		for (int loop = 1; loop <= counter ; loop++)
+		{
+			System.out.print(ArrList.get(loop - 1) + "\t");
+		}
+		System.out.println();
+	}
+
+	public String getInput()
+	{
+		System.out.print("Enter " + ArrList.get(0) + ": ");
+		String fieldValue1 = scannerObject.next();
+		return fieldValue1;
+	}
+
+}

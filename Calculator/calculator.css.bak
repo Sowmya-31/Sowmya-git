@@ -1,0 +1,28 @@
+
+.fa-calculator-simple 
+{
+  color: #243c64
+}
+
+body
+{
+	margin :100px;	
+}
+
+#delete
+{
+	color: tomato;
+}
+
+/* #Calculate
+{
+  background:white;
+  margin:20px; 
+  box-shadow: 1px 1px 1px 1px white;
+} */
+
+#table
+{
+	background-color: #AAD6A0;
+	border: 3px solid black;
+}
