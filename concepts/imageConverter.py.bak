@@ -1,0 +1,34 @@
+import sys
+import cv2
+file_path = sys.argv[1]
+image = cv2.imread(file_path)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+cv2.imwrite(file_path, gray)
+
+
+
+#print "Image checking"
+#from PIL import Image
+#import sys
+#fileName = sys.argv[1]
+#img = Image.open(fileName).convert('L')
+#img.save('converted_image.png ')
+
+#import cv2
+#import sys
+#fileName = sys.argv[1]
+#orig = cv2.imread('fileName')
+#gsi = cv2.cvtColor(orig, cv2.COLOR_BGR2GRAY)
+#cv2.imshow('Grayscale', gsi)
+
+
+#import cv2
+#import sys
+#fileName = sys.argv[1]
+#cv2.imshow('converted_image.jpg ', cv2.cvtColor(cv2.imread(fileName), cv2.COLOR_BGR2GRAY))
+#cv2.imwrite('converted.jpg ', cv2.cvtColor(cv2.imread(fileName), cv2.COLOR_BGR2GRAY))
+
+
+
+
+ 

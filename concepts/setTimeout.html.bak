@@ -1,0 +1,22 @@
+<html>
+<head>
+<title> setTimeout</title>
+</head>
+<body>
+<h5> Timeout set 2000 milliseconds</h5>
+
+
+<script>
+
+var a;
+
+a = setTimeout(fun, 2000);
+
+function fun() {
+alert("TimeOut");
+}
+</script>
+
+</body>
+
+</html>

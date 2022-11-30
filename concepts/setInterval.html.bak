@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Setinterval</title>
+
+
+ </head>
+ <body>
+ <h5>Interval Set for 5000 milliseconds</h5>
+   
+<script>  
+var var1 = setInterval(message, 5000); 
+
+
+
+function message() { 
+	alert("Interval checking");
+
+} 
+
+  
+</script>  
+  
+  
+ </body>
+</html>

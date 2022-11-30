@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		 <meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<style>
+			.imageContainer
+			{
+			float:left;
+			padding: 5px;
+			margin-left: 7%;
+			}
+		</style>
+		<script type="text/javascript">
+			function ConvertImage()
+			{
+				var form_data = new FormData();
+				var property = document.getElementById("image").files[0];
+				form_data.append("file", property);
+				$.ajax({
+					url: "GrayImage.php",
+					method: "post",
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					success: function(result){
+						$("#ConvertedImage").html(result);
+					}
+				});
+			}
+			function DisplayImage(input)
+			{
+				if (input.files && input.files[0])
+				{
+					var reader = new FileReader();
+					reader.onload = function (e) {
+                			$('#SourceImage')
+                    			.attr('src', e.target.result)
+                    			.width(500);
+                    			//.height(400);
+            				};
+			 		 reader.readAsDataURL(input.files[0]);
+ 				}
+    			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<h1>Image Conveter</h1>
+			<label for = "image">Select Image:</label>
+			<input type = "file" name = "image" id = "image" accept = "image/*" onchange="DisplayImage(this);">
+			<br>
+			<button onclick = "ConvertImage()">Convert</button>
+			<br>
+			<div id = "DisplaySourceImage" class = "imageContainer">
+			<img id = "SourceImage" src = "#" alt = "your image" />
+			</div>
+			<div id = "ConvertedImage" class = "imageContainer">
+			</div>
+		</center>
+	</body>
+</html>

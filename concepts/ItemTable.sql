@@ -1,0 +1,16 @@
+
+
+
+DROP TABLE IF EXISTS `BillDetails`;
+
+CREATE TABLE `BillDetails` (
+  `BillNumber` varchar(255) NOT NULL,
+  `ItemID` varchar(255) NOT NULL,
+  `SoldQty` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`BillNumber`,`ItemID`)
+); 
+
+
+
+
+INSERT INTO `BillDetails` VALUES ('010','MN78',2),('011','AB12',1),('011','BC',1),('012','OP53',3),('013','KL47',2),('014','OP53',1),('015','QR86',1),('016','IJ78',1),('017','MN78',1),('018','EF34',1),('019','AKD234',2),('019','BC',2),('019','QR86',1),('020','AB12',5);

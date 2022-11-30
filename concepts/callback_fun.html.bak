@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>CallBack_function</title>
+ </head>
+ <body>
+  
+<h3>JavaScript CallBack_function</h3>
+
+<p style = "color: yellow">JavaScript functions are executed in the sequence they are called.</p>
+
+<p id="msg1"></p>
+<p id = "msg2"></p>
+
+<script>
+
+function myParentFun(some) {
+	out.write(some);
+	var arg = "This display called back twice and the message carried that is:  " + some;
+	myChildFun(arg);
+}
+
+function myChildFun(arg)
+{
+ document.getElementById("msg1").innerHTML =arg;
+}
+
+function myDisplayer(greeting)
+{
+	document.getElementById("msg2").innerHTML = "This display called back once and the message carried that is:  " + greeting;
+}
+
+
+function myMaster() {
+	myParentFun("Hi friends");
+ 
+}
+
+function myMaster1() {
+   myDisplayer("Call back function in javascript is very simple to understand :-)");
+}
+
+myMaster();
+myMaster1();
+</script>
+
+ </body>
+</html>

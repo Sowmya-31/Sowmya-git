@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>StorageInJS</title>
+<style>
+
+.rect 
+{
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+  width: 250px;
+  background-color: #E6E6FA;
+}
+
+.coockie
+{
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+  width: 250px;
+  background-color: #90EE90;
+}
+</style>
+</head>
+<body>
+<div>
+<div class = "rect">
+<p> This is an experiment for making a remember me checkbox using local storage</p>
+<table>
+<tr>
+<td>UserName </td><td><input type = "textbox" id = "UserName"></td>
+</tr>
+<tr>
+<td>Password </td><td><input type = "password" id = "pwd"></td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;"><input type = "checkbox" name = "Storage" id = "Remember">Remember me</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;"><input type = "Button" onclick = "storageType()" value = "Log in" style = "background-color: #9400D3; color : white;"></td>
+</td>
+</table>
+<br><br>
+</div>
+<div class = "coockie">
+<p> This is an experiment to making a coockie</p>
+<select id = "Theme" onchange = "setColor()">	 
+<option value = "Select color">Select color</option>
+<option value = "Blue">Blue</option>
+<option value = "yellow">yellow</option>
+<option value = "Pink">Pink</option>
+</div>
+
+
+<script>
+const rmCheck = document.getElementById("Remember"), Passwd = document.getElementById("pwd"), userInput = document.getElementById("UserName");
+
+if (localStorage.checkbox && localStorage.checkbox !== "") 
+{
+  rmCheck.setAttribute("checked", "checked");
+  userInput.value = localStorage.username;
+  Passwd.value = localStorage.pwd;
+} 
+else 
+{
+  rmCheck.removeAttribute("checked");
+  userInput.value = "";
+  Passwd.value = "";
+}
+
+function storageType() 
+{
+  if (rmCheck.checked && userInput.value !== "") 
+  {
+    localStorage.username = userInput.value;
+	localStorage.pwd = Passwd.value;
+    localStorage.checkbox = rmCheck.value;
+  } 
+  else 
+  {
+    localStorage.username = "";
+	localStorage.pwd = "";
+    localStorage.checkbox = "";
+  }
+}
+window.onload = function()
+{
+	if (document.cookie.length != 0)
+	{
+		var nameValueArray =document.cookie.split("=");
+		document.bgColor = nameValueArray[1];
+		document.getElementById("Theme").value = nameValueArray[1]; 
+	}
+}
+
+function setColor()
+{
+	var selectedColor = document.getElementById("Theme").value;
+	if (selectedColor != "Select color")
+	{
+		document.bgColor = selectedColor;
+		document.cookie = "color=" + selectedColor + ";expires=Tues, 15 Nov 2022 01:00:00 UTC;";
+	}
+}
+</script>
+</body>
+</html>

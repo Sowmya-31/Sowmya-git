@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Document</title>
+<style>
+   body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+   }
+   .circleCanvas {
+      border: 3px solid #110101;
+   }
+</style>
+</head>
+<body>
+<h1>Draw a circle in JavaScript</h1>
+<canvas class="circleCanvas" width="400" height="200"></canvas><br />
+<button class="Btn">CLICK HERE</button>
+
+<h3>Click on the above button to create a circle in the above canvas element</h3>
+<script>
+   let canvasEle = document.querySelector(".circleCanvas");
+   let BtnEle = document.querySelector(".Btn");
+   BtnEle.addEventListener("click", () => {
+      var circle = canvasEle.getContext("2d");
+      circle.beginPath();
+      circle.arc(180, 100, 90, 0, 2 * Math.PI);
+      circle.stroke();
+   });
+ let hello = "";
+ hello = () => {
+  var x = document.getElementById("circleCanvas");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+	document.getElementByClassName("circleCanvas").innerHTML = hello();
+
+</script>
+</body>
+</html>

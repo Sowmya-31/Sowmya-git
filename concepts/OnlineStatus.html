@@ -1,0 +1,22 @@
+<!-- Check if online/connected -->
+
+<html>
+<head>
+<script>
+function updateOnlineStatus() {
+    document.getElementById("status").innerHTML = "You are online";
+}
+
+function updateOfflineStatus() {
+    document.getElementById("status").innerHTML = "You are offline";
+}
+
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOfflineStatus); 
+</script> 
+</head>
+<body>
+
+ <div id="status">You are online</div>
+</body>
+</html>
